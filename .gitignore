@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+*.log
+coverage
+src/generated
+dump.rdb
+dev.db
+dev.db-*

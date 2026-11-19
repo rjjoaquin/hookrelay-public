@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HookRelay</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <strong>HookRelay</strong>
+    <nav id="tabs" hidden>
+      <button data-tab="relays" class="active">Relays</button>
+      <button data-tab="events">Events</button>
+      <button data-tab="dead">Dead letters <span id="dead-count" class="badge"></span></button>
+    </nav>
+    <span id="stats"></span>
+    <span id="whoami" class="muted"></span>
+    <button id="signout" class="link" hidden>Sign out</button>
+  </header>
+
+  <main>
+    <form id="auth" class="card narrow" hidden>
+      <h2 id="auth-title">Sign in</h2>
+      <input id="email" type="email" placeholder="Email" autocomplete="email" maxlength="254" required />
+      <input id="password" type="password" placeholder="Password" autocomplete="current-password" maxlength="128" required />
+      <button id="auth-submit">Sign in</button>
+      <p id="auth-error" class="error"></p>
+      <p class="muted"><span id="auth-switch-text">No account?</span> <button type="button" id="auth-switch" class="link">Create one</button></p>
+    </form>
+
+    <section id="relays" hidden>
+      <form id="new-relay" class="row card">
+        <input name="name" placeholder="Relay name" maxlength="100" required />
+        <input name="url" placeholder="Forward to https://…" required />
+        <label class="check"><input type="checkbox" name="sign" /> Require signed requests</label>
+        <button>Create relay</button>
+      </form>
+      <div id="secrets"></div>
+      <div id="relay-list"></div>
+    </section>
+
+    <section id="events" hidden>
+      <div class="row">
+        <select id="status-filter">
+          <option value="">All events</option>
+          <option value="succeeded">Delivered</option>
+          <option value="retrying">Retrying</option>
+          <option value="pending">Pending</option>
+          <option value="dead">Dead</option>
+        </select>
+      </div>
+      <div class="split">
+        <table id="event-list"></table>
+        <div id="event-detail"></div>
+      </div>
+    </section>
+
+    <section id="dead" hidden>
+      <div class="row"><button id="replay-all">Replay all</button></div>
+      <table id="dead-list"></table>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
